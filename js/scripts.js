@@ -22,10 +22,16 @@ var repository = [
   },
 ];
 
-for (items in repository) {
-  if (repository[items].height > 1) {
-    document.write(repository[items].name + " (height: " + repository[items].height + "m) - Wow, that's big!<br><br>");
-  } else {
-    document.write(repository[items].name + ' (height: ' + repository[items].height + 'm)<br><br>');
-  }
-}
+//for (items in repository) {
+  //if (repository[items].height > 1) {
+    //document.write(repository[items].name + " (height: " + repository[items].height + "m) - Wow, that's big!<br><br>");
+  //} else {
+    //document.write(repository[items].name + ' (height: ' + repository[items].height + 'm)<br><br>');
+  //}
+//}
+
+repository.forEach(function(currentItems){
+  Object.keys(currentItems).forEach(function(property){
+    document.write(property + ': ' + currentItems[property] + '<br>'
+  )}
+)})
