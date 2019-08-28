@@ -47,7 +47,7 @@ var pokemonRepository = (function(){
   //}
 //}
 
-pokemonRepository.forEach(function(currentItems){
+pokemonRepository.getAll().forEach(function(currentItems){
   Object.keys(currentItems).forEach(function(property){
     document.write(property + ': ' + currentItems[property] + '<br>');
   });
