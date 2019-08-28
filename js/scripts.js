@@ -32,6 +32,6 @@ var repository = [
 
 repository.forEach(function(currentItems){
   Object.keys(currentItems).forEach(function(property){
-    document.write(property + ': ' + currentItems[property] + '<br>'
-  )}
-)})
+    document.write(property + ': ' + currentItems[property] + '<br>');
+  });
+});
