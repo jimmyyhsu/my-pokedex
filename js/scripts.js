@@ -25,7 +25,12 @@ var pokemonRepository = (function(){
 
   //Function to add new Pokemon data
   function add(pokemon){
+    //Must be an 'object' type
+    if (typeof pokemon !== 'object'){
+      return 'Not a valid input'
+    }else{
     repository.push(pokemon);
+    }
   }
 
   //Function to pull all Pokemon data
