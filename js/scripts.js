@@ -1,3 +1,5 @@
+var $pokemonList = document.querySelector('ul');
+
 var pokemonRepository = (function(){
   var repository = [
     {
@@ -38,22 +40,23 @@ var pokemonRepository = (function(){
     return repository;
   }
 
+  function addListItem(pokemon){
+    var listItem = document.createElement('li');
+    var button = document.createElement('button');
+    $pokemonList.appendChild(listItem);
+    button.innerText = pokemon.name;
+    button.classList.add('new-style')
+    listItem.appendChild(button);
+  }
+
   return{
     add: add,
-    getAll: getAll
+    getAll: getAll,
+    addListItem: addListItem
   };
 })();
 
-//for (items in repository) {
-  //if (repository[items].height > 1) {
-    //document.write(repository[items].name + " (height: " + repository[items].height + "m) - Wow, that's big!<br><br>");
-  //} else {
-    //document.write(repository[items].name + ' (height: ' + repository[items].height + 'm)<br><br>');
-  //}
-//}
-
-pokemonRepository.getAll().forEach(function(currentItems){
-  Object.keys(currentItems).forEach(function(property){
-    document.write(property + ': ' + currentItems[property] + '<br>');
-  });
-});
+//Creates list of Pokemon with Pokemon's name on the button
+pokemonRepository.getAll().forEach(function(currentItem){
+  pokemonRepository.addListItem(currentItem);
+})
