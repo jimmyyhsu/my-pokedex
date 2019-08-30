@@ -40,11 +40,6 @@ button:hover, button:focus {
   margin-bottom: 5px;
 }
 
-.logo-image {
-  height: 300px;
-  width: auto;
-}
-
 .page-header {
   display: flex;
   padding: 10px;
