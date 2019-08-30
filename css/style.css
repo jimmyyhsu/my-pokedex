@@ -1,0 +1,60 @@
+html, body{
+  margin: 0;
+  padding: 15px;
+  width: 100%;
+}
+
+*{
+  box-sizing: border-box;
+}
+
+ul {
+  position: absolute;
+  width: 450px;
+  margin: 10px auto 0;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+li {
+  display: flex;
+}
+
+button {
+  background: none;
+  color: #ccc;
+  width: 240px;
+  height: 50px;
+  border: 2px solid;
+  font-size: 15px;
+  border-radius: 4px;
+}
+
+button:hover, button:focus {
+  cursor: pointer;
+  opacity: 0.8;
+}
+
+
+.new-style {
+  margin-bottom: 5px;
+}
+
+.logo-image {
+  height: 300px;
+  width: auto;
+}
+
+.page-header {
+  display: flex;
+  padding: 10px;
+  flex-wrap: wrap;
+}
+
+
+#background {
+  background-image: url(../img/umbreon1.jpg);
+  background-size: cover;
+  background-position: center center;
+  height: 100vh;
+}
