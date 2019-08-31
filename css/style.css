@@ -5,12 +5,14 @@ html, body{
 }
 
 *{
-  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
 }
 
 ul {
+  text-align: center;
   position: absolute;
-  width: 450px;
+  width: 95%;
   margin: 10px auto 0;
   padding: 10px;
   box-sizing: border-box;
@@ -18,6 +20,8 @@ ul {
 
 li {
   display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 button {
@@ -35,15 +39,20 @@ button:hover, button:focus {
   opacity: 0.8;
 }
 
+.wrapper {
+  width: 100%;
+}
 
 .new-style {
   margin-bottom: 5px;
 }
 
 .page-header {
-  display: flex;
-  padding: 10px;
-  flex-wrap: wrap;
+  width: 60%;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 10px;
 }
 
 
@@ -52,4 +61,26 @@ button:hover, button:focus {
   background-size: cover;
   background-position: center center;
   height: 100vh;
+}
+
+@media only screen and (min-width: 768px){
+  #background {
+    background-image: url(../img/umbreon.jpg);
+  }
+  .page-header {
+    width: 30%;
+  }
+}
+
+@media only screen and (min-width: 1000px){
+  #background {
+    background-image: url(../img/umbreon.jpg);
+  }
+  li {
+    align-items: flex-start;
+    justify-content: flex-start;
+  }
+  .page-header {
+    width: 100%;
+  }
 }
