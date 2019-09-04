@@ -31,8 +31,10 @@ var pokemonRepository = (function(){
     })
   }
 
-  function showDetails(pokemon){
-    console.log(pokemon)
+  function showDetails(item){
+    pokemonRepository.loadDetails(item).then(function(){
+      console.log(item);
+    });
   }
 
   function loadList(){
@@ -44,7 +46,7 @@ var pokemonRepository = (function(){
           name: item.name,
           detailsUrl: item.url
         };
-        add (pokemon);
+        add(pokemon);
       });
     }).catch(function(e){
       console.error(e);
@@ -67,16 +69,17 @@ var pokemonRepository = (function(){
   return{
     add: add,
     getAll: getAll,
-    addListItem: addListItem,
-    showDetails: showDetails,
+    //addListItem: addListItem,
+    //showDetails: showDetails,
     loadList: loadList,
     loadDetails: loadDetails
   };
 })();
 
 //Creates list of Pokemon with Pokemon's name on the button
-pokemonRepository.loadList().then(function(){
+pokemonRepository.loadList().then(function() {
+  // Now the data is loaded!
   pokemonRepository.getAll().forEach(function(pokemon){
     addListItem(pokemon);
-  })
-})
+  });
+});
