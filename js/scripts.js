@@ -51,15 +51,32 @@ var pokemonRepository = (function(){
     })
   }
 
+  function loadDetails(item){
+    var url = item.detailsUrl;
+    return fetch(url).then(function(response){
+      return response.json();
+    }).then(function(details){
+      item.imageUrl = details.sprites.front_default;
+      item.height = details.height;
+      item.types = Object.keys(details.types);
+    }).catch(function(e){
+      console.error(e);
+    })
+  }
+
   return{
     add: add,
     getAll: getAll,
     addListItem: addListItem,
-    showDetails: showDetails
+    showDetails: showDetails,
+    loadList: loadList,
+    loadDetails: loadDetails
   };
 })();
 
 //Creates list of Pokemon with Pokemon's name on the button
-pokemonRepository.getAll().forEach(function(currentItem){
-  pokemonRepository.addListItem(currentItem);
+pokemonRepository.loadList().then(function(){
+  pokemonRepository.getAll().forEach(function(pokemon){
+    addListItem(pokemon);
+  })
 })
