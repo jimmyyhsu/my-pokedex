@@ -1,29 +1,8 @@
 var $pokemonList = document.querySelector('ul');
 
 var pokemonRepository = (function(){
-  var repository = [
-    {
-      name: 'Bulbasaur',
-      index: 1,
-      height: 0.7,
-      weight: 6.9,
-      types: ['grass','poison']
-    },
-    {
-      name: 'Ivysaur',
-      index: 2,
-      height: 1.0,
-      weight: 13.0,
-      types: ['grass','poison']
-    },
-    {
-      name: 'Venusaur',
-      index: 3,
-      height: 2.0,
-      weight: 100.0,
-      types: ['grass','poison']
-    }
-  ];
+  var repository = [];
+  var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   //Function to add new Pokemon data
   function add(pokemon){
@@ -54,6 +33,22 @@ var pokemonRepository = (function(){
 
   function showDetails(pokemon){
     console.log(pokemon)
+  }
+
+  function loadList(){
+    return fetch(apiUrl).then(function(response){
+      return response.json();
+    }).then(function(json){
+      json.results.forEach(function(item){
+        var pokemon = {
+          name: item.name,
+          detailsUrl: item.url
+        };
+        add (pokemon);
+      });
+    }).catch(function(e){
+      console.error(e);
+    })
   }
 
   return{
