@@ -1,8 +1,9 @@
-var $pokemonList = document.querySelector('ul');
 
-var pokemonRepository = (function(){
+var pokemonRepository = (function(){    //Start of IIFE
   var repository = [];
   var apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
+  var $modalContainer = document.querySelector('#modal-container');
+  var $pokemonList = document.querySelector('ul');
 
   //Function to add new Pokemon data
   function add(pokemon){
@@ -19,11 +20,12 @@ var pokemonRepository = (function(){
     return repository;
   }
 
+  //Function to add list for each pokemon object
   function addListItem(pokemon){
     var listItem = document.createElement('li');
     var button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add('new-style');
+    button.classList.add('show-modal');
     listItem.appendChild(button);
     $pokemonList.appendChild(listItem)
     button.addEventListener('click', function (){
@@ -31,12 +33,14 @@ var pokemonRepository = (function(){
     })
   }
 
+  //Function to show details of each Pokemon
   function showDetails(item){
     pokemonRepository.loadDetails(item).then(function(){
       console.log(item);
     });
   }
 
+  //Function to load pokemon list from API
   function loadList(){
     return fetch(apiUrl).then(function(response){
       return response.json();
@@ -66,15 +70,65 @@ var pokemonRepository = (function(){
     })
   }
 
+  //Funtion to show modal for Pokemon data
+  function showModal(item) {
+    $modalContainer.innerHTML = '';
+
+    var modal = document.createElement('div');
+    modal.classList.add('modal');
+
+    var closeButtonElement = document.createElement('button');
+    closeButtonElement.classList.add('modal-close');
+    closeButtonElement.innerText = 'Close';
+    //closeButtonElement.addEventListener('click', hideModal)
+
+    var nameElement = document.createElement('h1');
+    nameElement.innerText = item.name;
+
+    modal.appendChild(closeButtonElement);
+    modal.appendChild(nameElement);
+    $modalContainer.appendChild(modal);
+
+    $modalContainer.classList.add('is-visible')
+  }
+
+  //Function to hide modal
+  function hideModal() {
+    var $modalContainer = document.querySelector('#modal-container');
+    $modalContainer.classList.remove('is-visible');
+  }
+
+  //document.querySelector('.show-modal').addEventListener('click', function() {
+    //showModal(item);
+  //})
+
+  window.addEventListener('keydown', function(e) {
+    if (e.key === 'Escape' && $modalContainer.classList.contains('is-visible')) {
+      hideModal();
+    }
+  })
+
+  $modalContainer.addEventListener('click', (e) => {
+    // Since this is also triggered when clicking INSIDE the modal
+    // We only want to close if the user clicks directly on the overlay
+    var target = e.target;
+    if (target === $modalContainer) {
+      hideModal();
+    }
+  })
+
   return{
     add: add,
     getAll: getAll,
     addListItem: addListItem,
-    //showDetails: showDetails,
+    showDetails: showDetails,
     loadList: loadList,
-    loadDetails: loadDetails
+    loadDetails: loadDetails,
+    //showModal: showModal,
+    //hideModal: hideModal
   };
 })();
+
 
 //Creates list of Pokemon with Pokemon's name on the button
 pokemonRepository.loadList().then(function() {
