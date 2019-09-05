@@ -69,7 +69,7 @@ var pokemonRepository = (function(){
   return{
     add: add,
     getAll: getAll,
-    //addListItem: addListItem,
+    addListItem: addListItem,
     //showDetails: showDetails,
     loadList: loadList,
     loadDetails: loadDetails
@@ -80,6 +80,6 @@ var pokemonRepository = (function(){
 pokemonRepository.loadList().then(function() {
   // Now the data is loaded!
   pokemonRepository.getAll().forEach(function(pokemon){
-    addListItem(pokemon);
+    pokemonRepository.addListItem(pokemon);
   });
 });
