@@ -25,7 +25,7 @@ var pokemonRepository = (function() {    //Start of IIFE
     var listItem = document.createElement('li');
     var button = document.createElement('button');
     button.innerText = pokemon.name;
-    button.classList.add('show-modal');
+    button.classList.add('pokemon-name');
     listItem.appendChild(button);
     $pokemonList.appendChild(listItem)
     button.addEventListener('click', function() {
@@ -68,7 +68,11 @@ var pokemonRepository = (function() {    //Start of IIFE
   function createReusableModal() {
 
     var modal = document.createElement('div');
+    var modalElement1 = document.createElement('div');
+    var modalElement2 = document.createElement('div');
+    modalElement2.classList.add('pokemon-info')
     modal.classList.add('modal');
+    modal
 
     var closeButtonElement = document.createElement('button');
     closeButtonElement.classList.add('modal-close');
@@ -80,10 +84,12 @@ var pokemonRepository = (function() {    //Start of IIFE
     imageElement.classList.add('pokemon-img');
     var heightElement = document.createElement('p');
 
-    modal.appendChild(closeButtonElement);
-    modal.appendChild(nameElement);
-    modal.appendChild(imageElement);
-    modal.appendChild(heightElement);
+    modalElement1.appendChild(closeButtonElement);
+    modal.appendChild(modalElement1);
+    modalElement2.appendChild(nameElement);
+    modalElement2.appendChild(imageElement);
+    modalElement2.appendChild(heightElement);
+    modal.appendChild(modalElement2)
     $modalContainer.appendChild(modal);
   }
 
